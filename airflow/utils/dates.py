@@ -31,11 +31,12 @@ from croniter import croniter
 
 
 cron_presets = {
-    '@hourly': '0 * * * *',
-    '@daily': '0 0 * * *',
-    '@weekly': '0 0 * * 0',
-    '@monthly': '0 0 1 * *',
-    '@yearly': '0 0 1 1 *',
+    '@hourly': '45 * * * *',
+    '@daily': '45 9 * * *',
+    '@week_days': '45 9 * * MON-FRI',
+    '@weekly': '45 9 * * 0',
+    '@monthly': '45 9 10 * *',
+    '@yearly': '45 9 10 1 *',
 }
 
 
