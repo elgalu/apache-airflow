@@ -22,7 +22,7 @@ const path = require('path');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 // Input Directory (airflow/www_rbac)
 // noinspection JSUnresolvedVariable
@@ -34,13 +34,12 @@ const BUILD_DIR = path.resolve(__dirname, './static/dist');
 
 const config = {
   entry: {
-    connectionForm: STATIC_DIR + '/js/connection_form.js',
-    clock: STATIC_DIR + '/js/clock.js',
-    ganttChartD3v2: STATIC_DIR + '/js/gantt-chart-d3v2.js',
-    styleBundle: [
-      STATIC_DIR + '/css/main.css',
-      STATIC_DIR + '/css/bootstrap-theme.css'
-      ]
+    connectionForm: `${STATIC_DIR}/js/connection_form.js`,
+    clock: `${STATIC_DIR}/js/clock.js`,
+    graph: `${STATIC_DIR}/js/graph.js`,
+    ganttChartD3v2: `${STATIC_DIR}/js/gantt-chart-d3v2.js`,
+    main: `${STATIC_DIR}/css/main.css`,
+    airflowDefaultTheme : `${STATIC_DIR}/css/bootstrap-theme.css`,
   },
   output: {
     path: BUILD_DIR,
@@ -71,8 +70,8 @@ const config = {
         include: STATIC_DIR,
         use: [
           MiniCssExtractPlugin.loader,
-          "css-loader"
-        ]
+          'css-loader',
+        ],
       },
       /* for css linking images */
       {
@@ -96,12 +95,17 @@ const config = {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'file-loader',
       },
-    ]
+    ],
   },
   plugins: [
     new ManifestPlugin(),
     new CleanWebpackPlugin(['static/dist']),
-    new MiniCssExtractPlugin({filename: '[name].[chunkhash].css'}),
+    new MiniCssExtractPlugin({ filename: '[name].[chunkhash].css' }),
+
+    // MomentJS loads all the locale, making it a huge JS file.
+    // This will ignore the locales from momentJS
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
@@ -111,17 +115,19 @@ const config = {
     // this seems like an efficient solution for now. Will update that once
     // we'll have the dependencies imported within the custom JS
     new CopyWebpackPlugin([
-      {from: 'node_modules/nvd3/build/\*.min.\*',flatten:true},
+      { from: 'node_modules/nvd3/build/*.min.*', flatten: true },
       // Update this when upgrade d3 package, as the path in new D3 is different
-      {from: 'node_modules/d3/d3.min.\*', flatten:true},
-      {from: 'node_modules/dagre-d3/dist/\*.min.\*', flatten:true},
-      {from: 'node_modules/d3-tip/dist/index.js', to:'d3-tip.js', flatten:true},
-      {from: 'node_modules/bootstrap-3-typeahead/\*min.\*', flatten:true},
-      {from: 'node_modules/bootstrap-toggle/**/*bootstrap-toggle.min.\*',
-        flatten:true},
-      {from: 'node_modules/datatables.net/**/*\*.min.\*',flatten:true},
-      {from: 'node_modules/datatables.net-bs/**/*\*.min.\*',flatten:true},
-    ], {copyUnmodified: true})
+      { from: 'node_modules/d3/d3.min.*', flatten: true },
+      { from: 'node_modules/dagre-d3/dist/*.min.*', flatten: true },
+      { from: 'node_modules/d3-tip/dist/index.js', to: 'd3-tip.js', flatten: true },
+      { from: 'node_modules/bootstrap-3-typeahead/*min.*', flatten: true },
+      {
+        from: 'node_modules/bootstrap-toggle/**/*bootstrap-toggle.min.*',
+        flatten: true,
+      },
+      { from: 'node_modules/datatables.net/**/**.min.*', flatten: true },
+      { from: 'node_modules/datatables.net-bs/**/**.min.*', flatten: true },
+    ], { copyUnmodified: true }),
   ],
 };
 

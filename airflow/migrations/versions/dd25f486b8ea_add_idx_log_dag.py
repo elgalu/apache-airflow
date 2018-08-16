@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
@@ -17,28 +16,26 @@
 # specific language governing permissions and limitations
 # under the License.
 
-import psutil
+from alembic import op
 
-from airflow.task.task_runner.base_task_runner import BaseTaskRunner
-from airflow.utils.helpers import reap_process_group
+"""add idx_log_dag
+
+Revision ID: dd25f486b8ea
+Revises: 9635ae0956e7
+Create Date: 2018-08-07 06:41:41.028249
+
+"""
+
+# revision identifiers, used by Alembic.
+revision = 'dd25f486b8ea'
+down_revision = '9635ae0956e7'
+branch_labels = None
+depends_on = None
 
 
-class BashTaskRunner(BaseTaskRunner):
-    """
-    Runs the raw Airflow task by invoking through the Bash shell.
-    """
-    def __init__(self, local_task_job):
-        super(BashTaskRunner, self).__init__(local_task_job)
+def upgrade():
+    op.create_index('idx_log_dag', 'log', ['dag_id'], unique=False)
 
-    def start(self):
-        self.process = self.run_command(['bash', '-c'], join_args=True)
 
-    def return_code(self):
-        return self.process.poll()
-
-    def terminate(self):
-        if self.process and psutil.pid_exists(self.process.pid):
-            reap_process_group(self.process.pid, self.log)
-
-    def on_finish(self):
-        super(BashTaskRunner, self).on_finish()
+def downgrade():
+    op.drop_index('idx_log_dag', table_name='log')
