@@ -57,10 +57,10 @@ class _DataflowJob(LoggingMixin):
 
     def _get_job(self):
         if self._job_id:
-            job = self._dataflow.projects().jobs().get(
+            job = self._dataflow.projects().locations().jobs().get(
                 projectId=self._project_number,
-                jobId=self._job_id
-            ).execute(num_retries=5)
+                location=self._job_location,
+                jobId=self._job_id).execute(num_retries=5)
         elif self._job_name:
             job = self._get_job_id_from_name()
         else:
@@ -250,7 +250,7 @@ class DataFlowHook(GoogleCloudBaseHook):
                 'letter and ending with a letter or number '.format(task_id))
 
         if append_job_name:
-            job_name = task_id + "-" + str(uuid.uuid1())[:8]
+            job_name = task_id + "-" + str(uuid.uuid4())[:8]
         else:
             job_name = task_id
 
