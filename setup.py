@@ -154,19 +154,19 @@ azure_data_lake = [
 ]
 cassandra = ['cassandra-driver>=3.13.0']
 celery = [
-    'celery>=4.1.1, <4.2.0',
-    'flower>=0.7.3, <1.0'
+    'celery>=4.1.1',
+    'flower>=0.7.30'
 ]
 cgroups = [
     'cgroupspy>=0.1.4',
 ]
 # major update coming soon, clamp to 0.x
-cloudant = ['cloudant>=0.5.9,<2.0']
+cloudant = ['cloudant>=0.5.9']
 crypto = ['cryptography>=0.9.3']
 dask = [
-    'distributed>=1.17.1, <2'
+    'distributed>=1.17.12'
 ]
-databricks = ['requests>=2.5.1, <3']
+databricks = ['requests>=2.5.1']
 datadog = ['datadog>=0.14.0']
 doc = [
     'mock',
@@ -178,14 +178,14 @@ doc = [
 docker = ['docker>=2.0.0']
 druid = ['pydruid>=0.4.1']
 elasticsearch = [
-    'elasticsearch>=5.0.0,<6.0.0',
-    'elasticsearch-dsl>=5.0.0,<6.0.0'
+    'elasticsearch>=5.0.0',
+    'elasticsearch-dsl>=5.0.00'
 ]
-emr = ['boto3>=1.0.0, <1.8.0']
+emr = ['boto3>=1.0.0']
 gcp_api = [
     'httplib2>=0.9.2',
-    'google-api-python-client>=1.6.0, <2.0.0dev',
-    'google-auth>=1.0.0, <2.0.0dev',
+    'google-api-python-client>=1.6.0',
+    'google-auth>=1.0.0',
     'google-auth-httplib2>=0.0.1',
     'google-cloud-container>=0.1.1',
     'PyOpenSSL',
@@ -219,7 +219,7 @@ postgres = ['psycopg2-binary>=2.7.4']
 qds = ['qds-sdk>=1.9.6']
 rabbitmq = ['librabbitmq>=1.6.1']
 redis = ['redis>=2.10.5']
-s3 = ['boto3>=1.7.0, <1.8.0']
+s3 = ['boto3>=1.7.0']
 salesforce = ['simple-salesforce>=0.72']
 samba = ['pysmbclient>=0.1.3']
 segment = ['analytics-python>=1.2.9']
@@ -228,11 +228,11 @@ slack = ['slackclient>=1.0.0']
 mongo = ['pymongo>=3.6.0']
 snowflake = ['snowflake-connector-python>=1.5.2',
              'snowflake-sqlalchemy>=1.1.0']
-ssh = ['paramiko>=2.1.1', 'pysftp>=0.2.9', 'sshtunnel>=0.1.4,<0.2']
-statsd = ['statsd>=3.0.1, <4.0']
+ssh = ['paramiko>=2.1.1', 'pysftp>=0.2.9', 'sshtunnel>=0.1.4']
+statsd = ['statsd>=3.0.1']
 vertica = ['vertica-python>=0.5.1']
 webhdfs = ['hdfs[dataframe,avro,kerberos]>=2.0.4']
-winrm = ['pywinrm==0.2.2']
+winrm = ['pywinrm>=0.2.2']
 zendesk = ['zdesk']
 
 all_dbs = postgres + mysql + hive + mssql + hdfs + vertica + cloudant + druid + pinot \
@@ -245,9 +245,9 @@ devel = [
     'lxml>=4.0.0',
     'mock',
     'mongomock',
-    'moto==1.1.19',
+    'moto>=1.1.19',
     'nose',
-    'nose-ignore-docstring==0.2',
+    'nose-ignore-docstring>=0.2',
     'nose-timer',
     'parameterized',
     'paramiko',
@@ -292,46 +292,46 @@ def do_setup():
         zip_safe=False,
         scripts=['airflow/bin/airflow'],
         install_requires=[
-            'alembic>=0.8.3, <0.9',
+            'alembic>=0.8.3',
             'bleach~=2.1.3',
-            'configparser>=3.5.0, <3.6.0',
-            'croniter>=0.3.17, <0.4',
-            'dill>=0.2.2, <0.3',
-            'flask>=0.12.4, <0.13',
-            'flask-appbuilder>=1.11.1, <2.0.0',
-            'flask-admin==1.4.1',
-            'flask-caching>=1.3.3, <1.4.0',
-            'flask-login==0.2.11',
-            'flask-swagger==0.2.13',
-            'flask-wtf>=0.14.2, <0.15',
-            'funcsigs==1.0.0',
-            'future>=0.16.0, <0.17',
+            'configparser>=3.5.0',
+            'croniter>=0.3.17',
+            'dill>=0.2.2',
+            'flask>=0.12.4',
+            'flask-appbuilder>=1.11.1',
+            'flask-admin>=1.4.1',
+            'flask-caching>=1.3.3',
+            'flask-login>=0.2.11',
+            'flask-swagger>=0.2.13',
+            'flask-wtf>=0.14.2',
+            'funcsigs>=1.0.0',
+            'future>=0.16.0',
             'gitpython>=2.0.2',
-            'gunicorn>=19.4.0, <20.0',
+            'gunicorn>=19.4.0',
             'iso8601>=0.1.12',
-            'jinja2>=2.7.3, <2.9.0',
+            'jinja2>=2.7.3',
             'lxml>=4.0.0',
-            'markdown>=2.5.2, <3.0',
-            'pandas>=0.17.1, <1.0.0',
-            'pendulum==1.4.4',
-            'psutil>=4.2.0, <6.0.0',
-            'pygments>=2.0.1, <3.0',
-            'python-daemon>=2.1.1, <2.2',
-            'python-dateutil>=2.3, <3',
-            'python-nvd3==0.15.0',
-            'requests>=2.5.1, <3',
-            'setproctitle>=1.1.8, <2',
-            'sqlalchemy>=1.1.15, <1.2.0',
-            'tabulate>=0.7.5, <=0.8.2',
-            'tenacity==4.8.0',
+            'markdown>=2.5.2',
+            'pandas>=0.17.1',
+            'pendulum>=1.4.4',
+            'psutil>=4.2.0',
+            'pygments>=2.0.1',
+            'python-daemon>=2.1.1',
+            'python-dateutil>=2.3',
+            'python-nvd3>=0.15.0',
+            'requests>=2.5.1',
+            'setproctitle>=1.1.8',
+            'sqlalchemy>=1.1.15',
+            'tabulate>=0.7.5',
+            'tenacity>=4.8.0',
             'thrift>=0.9.2',
             'tzlocal>=1.4',
             'unicodecsv>=0.14.1',
-            'werkzeug>=0.14.1, <0.15.0',
-            'zope.deprecation>=4.0, <5.0',
+            'werkzeug>=0.14.1',
+            'zope.deprecation>=4.0',
         ],
         setup_requires=[
-            'docutils>=0.14, <1.0',
+            'docutils>=0.14',
         ],
         extras_require={
             'all': devel_all,
