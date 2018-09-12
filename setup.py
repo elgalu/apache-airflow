@@ -313,7 +313,7 @@ def do_setup():
             'lxml>=4.0.0',
             'markdown>=2.5.2',
             'pandas>=0.17.1',
-            'pendulum>=1.4.4',
+            'pendulum>=1.4.4,<2',
             'psutil>=4.2.0',
             'pygments>=2.0.1',
             'python-daemon>=2.1.1',
