@@ -385,7 +385,7 @@ def do_setup():
             'text-unidecode==1.2',
             'typing;python_version<"3.5"',
             'thrift>=0.9.2',
-            'tzlocal>=1.4,<2.0.0',
+            'tzlocal>=1.4',
             'unicodecsv>=0.14.1',
             'zope.deprecation>=4.0, <5.0',
         ],
